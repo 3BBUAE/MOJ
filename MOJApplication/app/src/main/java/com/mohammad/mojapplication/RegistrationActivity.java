@@ -1,6 +1,5 @@
 package com.mohammad.mojapplication;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -8,12 +7,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.mohammad.mojapplication.MOJdatabase.MOJDbHelper;
 import com.mohammad.mojapplication.Objects.NIDCard;
-import com.mohammad.mojapplication.RegistrationFragments.Communicator;
 import com.mohammad.mojapplication.RegistrationFragments.RegStepOne;
 import com.mohammad.mojapplication.RegistrationFragments.RegStepThree;
 import com.mohammad.mojapplication.RegistrationFragments.RegStepTwo;
+import com.mohammad.mojapplication.RegistrationFragments.Welcome;
 
 public class RegistrationActivity extends AppCompatActivity implements Communicator {
 
@@ -23,7 +21,7 @@ public class RegistrationActivity extends AppCompatActivity implements Communica
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        startStepOne();
+       startWelcomeFragment();
 
 
     }
@@ -81,10 +79,23 @@ public class RegistrationActivity extends AppCompatActivity implements Communica
     }
 
     @Override
-    public void startGreetingClass() {
-
+    public void startWelcomeFragment()
+    {
+        Welcome welcome = new Welcome();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.registrationActivityLayout, welcome, "wlc");
+        transaction.commit();
+    }
+    @Override
+    public void stopWelcomeFragment() {
+        Welcome welcome = (Welcome) manager.findFragmentByTag("wlc");
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.remove(welcome);
+        transaction.commit();
     }
 
+
+    @Override
     public void startStepOne()
     {
         RegStepOne regStepOne = new RegStepOne();

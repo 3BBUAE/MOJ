@@ -1,4 +1,4 @@
-package com.mohammad.mojapplication.RegistrationFragments;
+package com.mohammad.mojapplication;
 
 import com.mohammad.mojapplication.Objects.NIDCard;
 
@@ -9,7 +9,8 @@ public interface Communicator {
 
 
     public void sendData(String string);
-
     public void sendNIDcardObject(NIDCard nidCard);
-    public void startGreetingClass();
+    public void startWelcomeFragment();
+    public void stopWelcomeFragment();
+    public void startStepOne();
 }
